@@ -4,4 +4,4 @@ This repository contains the coursework for `Applied Machine Learning` course.
 
 ## Assignments
 
-[Assignment 1](/Assignment%201/README.md)
+- [Assignment 1](https://github.com/Aritra8438/AppliedMachineLearning/tree/main/Assignment%201)
