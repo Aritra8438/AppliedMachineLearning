@@ -1,3 +1,10 @@
 # Ignore virtual environment directories
 venv/
 */venv/
+# MLflow
+mlruns/
+mlartifacts/
+# DVC
+.dvc/
+/dvc.lock
+/dvc.yaml
