@@ -29,12 +29,12 @@ It has two endpoints:
 - `/health` - get request to test if the server is healthy.
 - `/score` - post request to implement the text classification system
 
-### 3. `tests/`
+### 3. [`tests/`](./tests)
 
-The test folder currently contains 3 important files:
+The `/tests` folder currently contains 3 important files:
 
 - [`conftest.py`](./tests/conftest.py) - contains the configuration for the integration tests.
-- [`integration_test.py`](./tests/integration.py) - contains integration tests which include running the flask server and closing it.
+- [`integration_test.py`](./tests/integration_test.py) - contains integration tests which include running the flask server and closing it.
 - [`unit_test.py`](./tests/unit_test.py) - contains unit tests that test the score api.
 
 ## Comments
