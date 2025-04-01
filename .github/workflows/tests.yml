@@ -1,4 +1,4 @@
-name: Unit test and Itegration test
+name: Unit test and Integration test
 
 on: [push, pull_request]
 
