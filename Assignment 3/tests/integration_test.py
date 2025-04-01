@@ -33,13 +33,41 @@ def test_flask():
 def test_home_okay(client):
     """Test on get method"""
     response = client.get("/health")
-    assert response.status_code == 200
+    assert (
+        response.status_code == 200
+    ), f"Unexpected status code: {response.status_code}"
+    assert response.json == {
+        "status": "API is up and running!"
+    }, f"Unexpected response: {response.json}"
+
+
+def test_response_has_two_keys(client):
+    """Test to verify that the response contains exactly two keys"""
+    response = client.post("/score", json={"text": "hello"})
+    response_data = response.json
+    assert (
+        len(response_data.keys()) == 2
+    ), f"Expected 2 keys, but got {len(response_data.keys())}"
+    assert "prediction" in response_data, "Response should contain 'prediction' key"
+    assert "propensity" in response_data, "Response should contain 'propensity' key"
 
 
 def test_home_post(client):
     """Test on post method with JSON input"""
     response = client.post("/score", json={"text": "hello"})
-    assert response.status_code == 200
+    assert (
+        response.status_code == 200
+    ), f"Unexpected status code: {response.status_code}"
+    assert "prediction" in response.json, "Response should contain 'prediction' key"
+    assert "propensity" in response.json, "Response should contain 'propensity' key"
+    assert isinstance(response.json["prediction"], str), "Prediction should be a string"
+    assert response.json["prediction"] in [
+        "spam",
+        "ham",
+    ], "Prediction should be either 'spam' or 'ham'"
+    assert isinstance(
+        response.json["propensity"], float
+    ), "Propensity should be a float"
 
 
 def test_obvious_spam(client):
@@ -52,10 +80,9 @@ def test_obvious_spam(client):
 
     for text in spam_texts:
         response = client.post("/score", json={"text": text})
-        prediction = response.json["prediction"]
-        assert (
-            prediction == "spam"
-        ), f"Obvious spam should be predicted as 1, got {prediction}"
+        response_data = response.json
+        prediction = response_data.get("prediction")
+        assert prediction == "spam", f"Expected 'spam', but got {prediction}"
 
 
 def test_obvious_ham(client):
@@ -68,7 +95,6 @@ def test_obvious_ham(client):
 
     for text in ham_texts:
         response = client.post("/score", json={"text": text})
-        prediction = response.json["prediction"]
-        assert (
-            prediction == "ham"
-        ), f"Obvious ham should be predicted as 0, got {prediction}"
+        response_data = response.json
+        prediction = response_data.get("prediction")
+        assert prediction == "ham", f"Expected 'ham', but got {prediction}"
