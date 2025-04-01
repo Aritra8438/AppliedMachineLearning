@@ -6,6 +6,7 @@ import sklearn
 import sklearn.pipeline
 
 nltk.download("stopwords")
+nltk.download('punkt_tab')
 warnings.filterwarnings("ignore")
 
 
