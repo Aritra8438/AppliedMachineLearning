@@ -3,9 +3,9 @@ import nltk
 from nltk.corpus import stopwords
 import warnings
 import sklearn
-import sklearn.pipeline
 
 nltk.download("stopwords")
+nltk.download("punkt_tab")
 warnings.filterwarnings("ignore")
 
 
@@ -42,7 +42,7 @@ def score(
     """
     Classify a text input using a trained model and a specified threshold.
     This function preprocesses the input text, transforms it using a vectorizer,
-    and predicts whether the text meets the classification criteria based on the threshold.
+    and predicts whether the text is spam or ham based on the threshold.
     Args:
         text: The input text to classify.
         model: A trained sklearn model for classification.
