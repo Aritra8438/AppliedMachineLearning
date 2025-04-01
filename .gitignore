@@ -8,3 +8,5 @@ mlartifacts/
 .dvc/
 /dvc.lock
 /dvc.yaml
+# pycache files
+__pycache__/
