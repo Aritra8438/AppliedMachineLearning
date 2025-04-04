@@ -45,7 +45,7 @@ def test_docker():
     )
 
     # Give the container time to start up
-    time.sleep(10)
+    time.sleep(50)
 
     response = requests.get("http://127.0.0.1:5000/health")
     assert (
