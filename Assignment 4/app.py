@@ -7,10 +7,10 @@ app = Flask(__name__)
 
 def load_model_and_vectorizer():
     """Helper function to load the model and vectorizer"""
-    with open("./Assignment 3/best_model.pkl", "rb") as file:
+    with open("./best_model.pkl", "rb") as file:
         model = pickle.load(file)
 
-    with open("./Assignment 3/tfidf_vectorizer.pkl", "rb") as file:
+    with open("./tfidf_vectorizer.pkl", "rb") as file:
         vectorizer = pickle.load(file)
 
     return model, vectorizer
