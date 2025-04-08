@@ -44,10 +44,22 @@ def test_docker():
         text=True,
     )
 
-    # Give the container time to start up
-    time.sleep(300)
+    # Give the container time to start up by polling the health endpoint
+    max_wait_time = 300
+    wait_interval = 5
+    elapsed_time = 0
 
-    response = requests.get("http://127.0.0.1:5000/health")
+    while elapsed_time < max_wait_time:
+        try:
+            response = requests.get("http://127.0.0.1:5000/health")
+            if response.status_code == 200:
+                break
+        except requests.ConnectionError:
+            pass
+        time.sleep(wait_interval)
+        elapsed_time += wait_interval
+    else:
+        raise TimeoutError("Docker container did not become healthy in time.")
     assert (
         response.status_code == 200
     ), f"Unexpected status code: {response.status_code}"
